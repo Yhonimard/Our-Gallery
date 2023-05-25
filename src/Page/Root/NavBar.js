@@ -10,13 +10,15 @@ import {
 import { grey } from "@mui/material/colors";
 import { useState } from "react";
 import { Menu as IconMenu } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [openMenu, setOpenMenu] = useState();
   const isOpenMenu = Boolean(openMenu);
+  const navigate = useNavigate();
 
   return (
-    <AppBar sx={{ px: 2, bgcolor: grey[800] }}>
+    <AppBar sx={{ px: 2, bgcolor: grey[800] }} position="sticky">
       <Toolbar>
         <Typography sx={{ flexGrow: 1 }}>Our Album</Typography>
         <IconButton
@@ -31,7 +33,8 @@ const NavBar = () => {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem>testing</MenuItem>
+          <MenuItem onClick={() => navigate("add-photo")}>Add photo</MenuItem>
+          <MenuItem>Logout</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>
