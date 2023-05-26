@@ -7,7 +7,7 @@ const RootPage = () => {
   return (
     <div>
       <NavBar />
-      <Box component="main" sx={{ bgcolor: grey[900] }}>
+      <Box component="main" sx={{ bgcolor: grey[900], minHeight: "100vh" }}>
         <Outlet />
       </Box>
       <Footer />

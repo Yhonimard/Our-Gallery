@@ -12,6 +12,7 @@ const HomePage = () => {
           color="white"
           textTransform="uppercase"
           fontSize="30px"
+          sx={{ textDecoration: "underline" }}
         >
           Our Album!!
         </Typography>

@@ -7,6 +7,7 @@ const AddPhoto = () => {
       <Box
         sx={{
           minHeight: "110vh",
+          py: { xs: 5 },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

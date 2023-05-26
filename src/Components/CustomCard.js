@@ -22,9 +22,13 @@ const CustomCard = ({ photos, place, date }) => {
           <CardMedia
             image={photos}
             component="img"
-            sx={{ maxHeight: "290px" }}
+            sx={{
+              maxHeight: "290px",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
           />
-          <CardContent>
+          <CardContent sx={{}}>
             <Typography
               sx={{
                 textTransform: "uppercase",

@@ -17,7 +17,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBar sx={{ px: 2, bgcolor: grey[800] }} position="fixed">
+    <AppBar sx={{ px: 2, bgcolor: grey[800] }} position="static">
       <Toolbar>
         <Typography sx={{ flexGrow: 1 }}>Our Album</Typography>
         <IconButton
