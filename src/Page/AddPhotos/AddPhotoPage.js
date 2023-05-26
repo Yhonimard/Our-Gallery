@@ -3,10 +3,10 @@ import AddPhotoForm from "./AddPhotoForm";
 
 const AddPhoto = () => {
   return (
-    <Container sx={{ height: "100vh" }}>
+    <Container sx={{ minHeight: "100vh" }}>
       <Box
         sx={{
-          minHeight: "100vh",
+          minHeight: "110vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

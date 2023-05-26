@@ -19,7 +19,11 @@ const CustomCard = ({ photos, place, date }) => {
         }}
       >
         <CardActionArea>
-          <CardMedia image={photos} component="img" />
+          <CardMedia
+            image={photos}
+            component="img"
+            sx={{ maxHeight: "290px" }}
+          />
           <CardContent>
             <Typography
               sx={{
