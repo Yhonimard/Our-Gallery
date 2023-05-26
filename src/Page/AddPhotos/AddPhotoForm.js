@@ -21,7 +21,6 @@ const AddPhotoForm = () => {
   const { imgUpload, imgUrl } = useSelector((state) => state.imgReducer);
 
   const handleUploadPhoto = async (e) => {
-    if (!e.target.files[0]) return;
     const file = e.target.files[0];
     console.log(file);
     dispatch(setImgFile(file));
@@ -45,13 +44,15 @@ const AddPhotoForm = () => {
       place: data.place,
       date: data.date,
     };
-    reset();
-    dispatch(setImgFile(null));
 
     try {
       const add = await addDoc(photoRef, datas);
       console.log(add);
+      reset();
+      dispatch(setImgFile(null));
     } catch (error) {
+      reset();
+      dispatch(setImgFile(null));
       console.log(error);
     }
   };

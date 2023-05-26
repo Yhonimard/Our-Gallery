@@ -16,6 +16,7 @@ const BottomHome = () => {
       ...doc.data(),
       id: doc.id,
     }));
+    console.log(filteredData);
 
     dispatch(setPhotoDatas(filteredData));
   }, [dispatch]);

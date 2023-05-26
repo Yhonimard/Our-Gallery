@@ -16,7 +16,7 @@ const InputFile = ({ handleUploadPhoto }) => {
       {imgUpload ? (
         <div onClick={handleImgClick}>
           <img
-            style={{ width: "100%", cursor: "pointer" }}
+            style={{ width: "100%", cursor: "pointer", maxWidth: "400px" }}
             src={URL.createObjectURL(imgUpload)}
             alt="foto will upload"
           />
