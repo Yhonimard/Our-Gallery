@@ -7,9 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const CustomCard = (props) => {
-  const { title } = props;
-  console.log(title);
+const CustomCard = ({ photos, place, date }) => {
   return (
     <Grid item xs={6} sm={4} md={3}>
       <Card
@@ -21,10 +19,7 @@ const CustomCard = (props) => {
         }}
       >
         <CardActionArea>
-          <CardMedia
-            image="https://source.unsplash.com/random/500x500/?love"
-            component="img"
-          />
+          <CardMedia image={photos} component="img" />
           <CardContent>
             <Typography
               sx={{
@@ -34,10 +29,10 @@ const CustomCard = (props) => {
                 textAlign: "center",
               }}
             >
-              Cianjur
+              {place}
             </Typography>
             <Typography fontSize={12} fontWeight="bold" textAlign="center">
-              20-12-2015
+              {date}
             </Typography>
           </CardContent>
         </CardActionArea>

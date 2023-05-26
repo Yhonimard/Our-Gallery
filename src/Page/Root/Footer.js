@@ -14,7 +14,7 @@ const Footer = () => {
       }}
     >
       <Typography color="white" textAlign="center">
-        Copyright © {new Date().getFullYear} Yhonimard & Alyana Putri
+        Copyright © {new Date().getFullYear()} Yhonimard & Alyana Putri
       </Typography>
     </Box>
   );

@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Avatar,
   IconButton,
   Menu,
   MenuItem,

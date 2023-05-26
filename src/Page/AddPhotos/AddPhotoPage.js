@@ -1,23 +1,28 @@
-import { useState } from "react";
-import { ref, uploadBytes } from "firebase/storage";
-import { Storage } from "../../Lib/Firebase";
-import { v4 } from "uuid";
+import { useRef, useState } from "react";
+
+import { Box, Container } from "@mui/material";
+import AddPhotoForm from "./AddPhotoForm";
+import { useDispatch } from "react-redux";
 
 const AddPhoto = () => {
   const [imgUpload, setImgUpload] = useState(null);
-  console.log(imgUpload);
-  const uploadImg = () => {
-    if (imgUpload == null) return;
-    const imgRef = ref(Storage, `images/${imgUpload.name + v4()}`);
-    uploadBytes(imgRef, imgUpload).then(() => {
-      alert("imgupload");
-    });
-  };
+
+  const dispatch = useDispatch();
+
   return (
-    <>
-      <input type="file" onChange={(e) => setImgUpload(e.target.files[0])} />
-      <button onClick={uploadImg}>upload img</button>
-    </>
+    <Container sx={{ height: "100vh" }}>
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <AddPhotoForm />
+      </Box>
+    </Container>
   );
 };
 

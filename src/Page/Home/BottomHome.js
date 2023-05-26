@@ -1,47 +1,40 @@
-import { Card, Container, Grid } from "@mui/material";
-import CustomCard from "../../Components/CustomCard";
+import { Container, Grid } from "@mui/material";
+import CustomCard from "Components/CustomCard";
+import { useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPhotoDatas } from "Page/store/ImgReducer";
+import Gallery from "Api/Gallery";
 
 const BottomHome = () => {
+  const dispatch = useDispatch();
+  const { photoData } = useSelector((state) => state.imgReducer);
+
+  const getPhotoData = useCallback(async () => {
+    const data = await Gallery.getPhoto();
+
+    const filteredData = data.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+
+    dispatch(setPhotoDatas(filteredData));
+  }, [dispatch]);
+
+  useEffect(() => {
+    getPhotoData();
+  }, [getPhotoData]);
+
   return (
     <Container sx={{ mt: 5, paddingBottom: 10 }}>
       <Grid container spacing={2}>
-        <CustomCard title="description description description description description description description description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
-        <CustomCard title="description" />
+        {photoData.map((p) => (
+          <CustomCard
+            photos={p.photos}
+            date={p.date}
+            place={p.place}
+            key={p.id}
+          />
+        ))}
       </Grid>
     </Container>
   );

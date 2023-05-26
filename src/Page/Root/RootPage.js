@@ -6,13 +6,13 @@ import { grey } from "@mui/material/colors";
 import Footer from "./Footer";
 const RootPage = () => {
   return (
-    <ScopedCssBaseline>
+    <>
       <NavBar />
       <Box component="main" sx={{ bgcolor: grey[900] }} minHeight="100vh">
         <Outlet />
       </Box>
       <Footer />
-    </ScopedCssBaseline>
+    </>
   );
 };
 
