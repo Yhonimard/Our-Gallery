@@ -18,42 +18,41 @@ const AddPhotoForm = () => {
 
   const photoRef = collection(db, "our_photos");
 
-  const { imgUpload, imgUrl } = useSelector((state) => state.imgReducer);
+  const { imgUpload } = useSelector((state) => state.imgReducer);
 
   const handleUploadPhoto = async (e) => {
     const file = e.target.files[0];
+    if (!file) return;
     console.log(file);
     dispatch(setImgFile(file));
   };
 
   const submitHandler = async (data) => {
     try {
-      const imgRef = ref(Storage, `images/${imgUpload.name + v4()}`);
+      const imgRef = ref(Storage, `images/${imgUpload.name}`);
       const uploadTask = await uploadBytesResumable(imgRef, imgUpload);
       const imgUrl = await getDownloadURL(uploadTask.ref);
       console.log(imgUrl);
+      const datas = {
+        photos: imgUrl,
+        place: data.place,
+        date: data.date,
+      };
+      try {
+        const add = await addDoc(photoRef, datas);
+        console.log(add);
+        reset();
+        dispatch(setImgFile(null));
+      } catch (error) {
+        reset();
+        dispatch(setImgFile(null));
+        console.log(error);
+      }
       dispatch(setPhotoUrl(imgUrl));
     } catch (error) {
       reset();
       console.log("error");
       dispatch(setImgFile(null));
-    }
-
-    const datas = {
-      photos: imgUrl,
-      place: data.place,
-      date: data.date,
-    };
-
-    try {
-      const add = await addDoc(photoRef, datas);
-      console.log(add);
-      reset();
-      dispatch(setImgFile(null));
-    } catch (error) {
-      reset();
-      dispatch(setImgFile(null));
-      console.log(error);
     }
   };
 
