@@ -1,9 +1,9 @@
-import { Stack, IconButton, Typography } from "@mui/material";
+import { Stack, IconButton, Typography, Box } from "@mui/material";
 import { UploadFile } from "@mui/icons-material";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 
-const InputFile = ({ handleUploadPhoto }) => {
+const InputFile = ({ handleUploadPhoto, isSendingData }) => {
   const { imgUpload } = useSelector((state) => state.imgReducer);
 
   const imgBtnRef = useRef(null);
@@ -14,7 +14,7 @@ const InputFile = ({ handleUploadPhoto }) => {
   return (
     <Stack alignItems="center">
       {imgUpload ? (
-        <div onClick={handleImgClick}>
+        <Box onClick={handleImgClick}>
           <img
             style={{ width: "100%", cursor: "pointer", maxWidth: "400px" }}
             src={URL.createObjectURL(imgUpload)}
@@ -26,10 +26,14 @@ const InputFile = ({ handleUploadPhoto }) => {
             onChange={handleUploadPhoto}
             ref={imgBtnRef}
           />
-        </div>
+        </Box>
       ) : (
         <>
-          <IconButton sx={{ mt: 1 }} onClick={handleImgClick}>
+          <IconButton
+            sx={{ mt: 1 }}
+            onClick={handleImgClick}
+            disabled={isSendingData}
+          >
             <UploadFile />
             <input
               type="file"

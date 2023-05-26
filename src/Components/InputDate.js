@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import moment from "moment";
 import { TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-const DatePick = ({ AdapterMoment, control }) => {
+const DatePick = ({ AdapterMoment, control, isSendingData }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Controller
@@ -18,6 +18,7 @@ const DatePick = ({ AdapterMoment, control }) => {
             minDate={moment(new Date(2022, 9, 1))}
             maxDate={moment(new Date())}
             onChange={(value) => onChange(moment(value).format("DD-MM-YYYY"))}
+            disabled={isSendingData}
             renderInput={(params) => (
               console.log(invalid),
               (

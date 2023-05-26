@@ -2,7 +2,6 @@ import { Button, Paper, TextField } from "@mui/material";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { Storage } from "../../Lib/Firebase";
-import { v4 } from "uuid";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { setImgFile, setPhotoUrl } from "../store/ImgReducer";
@@ -10,6 +9,8 @@ import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../../Lib/Firebase";
 import DatePick from "Components/InputDate";
 import InputFile from "Components/InputFile";
+import { setSendingData } from "Page/store/GlobalReducer";
+import { enqueueSnackbar } from "notistack";
 
 const AddPhotoForm = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const AddPhotoForm = () => {
   const photoRef = collection(db, "our_photos");
 
   const { imgUpload } = useSelector((state) => state.imgReducer);
+  const { isSendingData } = useSelector((state) => state.globalReducer);
 
   const handleUploadPhoto = async (e) => {
     const file = e.target.files[0];
@@ -28,6 +30,8 @@ const AddPhotoForm = () => {
   };
 
   const submitHandler = async (data) => {
+    enqueueSnackbar("tunggu ya lagi di upload ini", { variant: "info" });
+    dispatch(setSendingData(true));
     try {
       const imgRef = ref(Storage, `images/${imgUpload.name}`);
       const uploadTask = await uploadBytesResumable(imgRef, imgUpload);
@@ -44,16 +48,22 @@ const AddPhotoForm = () => {
         reset();
         dispatch(setImgFile(null));
       } catch (error) {
+        enqueueSnackbar("yah error", { variant: "error" });
         reset();
+        setSendingData(false);
         dispatch(setImgFile(null));
         console.log(error);
       }
       dispatch(setPhotoUrl(imgUrl));
     } catch (error) {
+      enqueueSnackbar("yah error", { variant: "error" });
       reset();
       console.log("error");
+      setSendingData(false);
       dispatch(setImgFile(null));
     }
+    setSendingData(false);
+    enqueueSnackbar("berhasil nih", { variant: "success" });
   };
 
   return (
@@ -73,14 +83,26 @@ const AddPhotoForm = () => {
       <TextField
         variant="standard"
         sx={{ width: "100%" }}
-        label="dimana"
-        {...register("place")}
+        label="Lokasi Photo"
+        {...register("place", { required: true })}
+        disabled={isSendingData}
       />
 
-      <DatePick AdapterMoment={AdapterMoment} control={control} />
-      <InputFile handleUploadPhoto={handleUploadPhoto} />
-
-      <Button variant="contained" type="submit" color="inherit">
+      <DatePick
+        AdapterMoment={AdapterMoment}
+        control={control}
+        isSendingData={isSendingData}
+      />
+      <InputFile
+        handleUploadPhoto={handleUploadPhoto}
+        isSendingData={isSendingData}
+      />
+      <Button
+        variant="contained"
+        type="submit"
+        color="inherit"
+        disabled={isSendingData}
+      >
         Upload
       </Button>
     </Paper>

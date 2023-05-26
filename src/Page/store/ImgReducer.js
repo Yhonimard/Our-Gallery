@@ -6,7 +6,7 @@ const initialState = {
   photoData: [],
 };
 
-export const counterSlice = createSlice({
+export const ImgReducer = createSlice({
   name: "ImgUpload",
   initialState,
   reducers: {
@@ -23,6 +23,6 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setImgFile, setPhotoUrl, setPhotoDatas } = counterSlice.actions;
+export const { setImgFile, setPhotoUrl, setPhotoDatas } = ImgReducer.actions;
 
-export default counterSlice.reducer;
+export default ImgReducer.reducer;
