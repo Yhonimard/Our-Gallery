@@ -19,8 +19,8 @@ const AddPhotoForm = () => {
 
   const photoRef = collection(db, "our_photos");
 
-  const { imgUpload } = useSelector((state) => state.imgReducer);
-  const { isSendingData } = useSelector((state) => state.globalReducer);
+  const { imgUpload } = useSelector((state) => state.img);
+  const { isSendingData } = useSelector((state) => state.global);
 
   const handleUploadPhoto = async (e) => {
     const file = e.target.files[0];

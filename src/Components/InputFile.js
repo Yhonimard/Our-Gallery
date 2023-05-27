@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 
 const InputFile = ({ handleUploadPhoto, isSendingData }) => {
-  const { imgUpload } = useSelector((state) => state.imgReducer);
+  const { imgUpload } = useSelector((state) => state.img);
 
   const imgBtnRef = useRef(null);
   const handleImgClick = () => {

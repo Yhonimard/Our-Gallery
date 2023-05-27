@@ -9,7 +9,7 @@ import {
 
 const CustomCard = ({ photos, place, date }) => {
   return (
-    <Grid item xs={6} sm={4} md={3}>
+    <Grid item xs={6} sm={4} md={3} lg={2.4}>
       <Card
         sx={{
           cursor: "pointer",
@@ -19,27 +19,12 @@ const CustomCard = ({ photos, place, date }) => {
         }}
       >
         <CardActionArea>
-          <CardMedia
-            image={photos}
-            component="img"
-            sx={{
-              maxHeight: "290px",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-          />
-          <CardContent sx={{}}>
-            <Typography
-              sx={{
-                textTransform: "uppercase",
-                fontSize: 13,
-                fontWeight: 600,
-                textAlign: "center",
-              }}
-            >
+          <CardMedia image={photos} component="img" height={250} />
+          <CardContent>
+            <Typography noWrap textAlign="center" variant="body1">
               {place}
             </Typography>
-            <Typography fontSize={12} fontWeight="bold" textAlign="center">
+            <Typography variant="body2" textAlign="center">
               {date}
             </Typography>
           </CardContent>

@@ -7,7 +7,7 @@ import Gallery from "Api/Gallery";
 
 const BottomHome = () => {
   const dispatch = useDispatch();
-  const { photoData } = useSelector((state) => state.imgReducer);
+  const { photoData } = useSelector((state) => state.img);
 
   const getPhotoData = useCallback(async () => {
     const data = await Gallery.getPhoto();
@@ -27,7 +27,7 @@ const BottomHome = () => {
 
   return (
     <Container sx={{ mt: 5, paddingBottom: 10 }}>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         {photoData.map((p) => (
           <CustomCard
             photos={p.photos}
