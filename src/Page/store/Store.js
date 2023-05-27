@@ -1,18 +1,25 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import imgReducer from "./ImgReducer";
-import GlobalReducer from "./GlobalReducer";
-import storage from "redux-persist/lib/storage";
-import { persistReducer, persistStore } from "redux-persist";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import imgReducer from './img/ImgReducer';
+import GlobalReducer from './global/GlobalReducer';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
-import AuthReducer from "./AuthReducer";
+import AuthReducer from './auth/AuthReducer';
 
-const authReducer = combineReducers({
+const rootReducer = combineReducers({
   auth: AuthReducer,
   img: imgReducer,
   global: GlobalReducer,
 });
 
-const persistedReducer = persistReducer({ key: "root", storage }, authReducer);
+const persistedReducer = persistReducer(
+  {
+    key: 'root',
+    storage,
+    whitelist: ['auth'],
+  },
+  rootReducer
+);
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -21,3 +28,4 @@ export const store = configureStore({
       serializableCheck: false,
     }),
 });
+export const persist = persistStore(store);

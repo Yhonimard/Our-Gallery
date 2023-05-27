@@ -1,23 +1,23 @@
-import { Button, Paper, TextField } from "@mui/material";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { Storage } from "../../Lib/Firebase";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { setImgFile, setPhotoUrl } from "../store/ImgReducer";
-import { addDoc, collection } from "@firebase/firestore";
-import { db } from "../../Lib/Firebase";
-import DatePick from "Components/InputDate";
-import InputFile from "Components/InputFile";
-import { setSendingData } from "Page/store/GlobalReducer";
-import { enqueueSnackbar } from "notistack";
+import { Button, Paper, TextField } from '@mui/material';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { Storage } from '../../Lib/Firebase';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { setImgFile, setPhotoUrl } from '../Store/img/ImgReducer';
+import { addDoc, collection } from '@firebase/firestore';
+import { db } from '../../Lib/Firebase';
+import DatePick from 'Components/InputDate';
+import InputFile from 'Components/InputFile';
+import { setSendingData } from 'Page/Store/global/GlobalReducer';
+import { enqueueSnackbar } from 'notistack';
 
 const AddPhotoForm = () => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, reset, control } = useForm();
 
-  const photoRef = collection(db, "our_photos");
+  const photoRef = collection(db, 'our_photos');
 
   const { imgUpload } = useSelector((state) => state.img);
   const { isSendingData } = useSelector((state) => state.global);
@@ -30,7 +30,7 @@ const AddPhotoForm = () => {
   };
 
   const submitHandler = async (data) => {
-    enqueueSnackbar("tunggu ya lagi di upload ini", { variant: "info" });
+    enqueueSnackbar('tunggu ya lagi di upload ini', { variant: 'info' });
     dispatch(setSendingData(true));
     try {
       const imgRef = ref(Storage, `images/${imgUpload.name}`);
@@ -48,7 +48,7 @@ const AddPhotoForm = () => {
         reset();
         dispatch(setImgFile(null));
       } catch (error) {
-        enqueueSnackbar("yah error", { variant: "error" });
+        enqueueSnackbar('yah error', { variant: 'error' });
         reset();
         setSendingData(false);
         dispatch(setImgFile(null));
@@ -56,14 +56,14 @@ const AddPhotoForm = () => {
       }
       dispatch(setPhotoUrl(imgUrl));
     } catch (error) {
-      enqueueSnackbar("yah error", { variant: "error" });
+      enqueueSnackbar('yah error', { variant: 'error' });
       reset();
-      console.log("error");
+      console.log('error');
       setSendingData(false);
       dispatch(setImgFile(null));
     }
     setSendingData(false);
-    enqueueSnackbar("berhasil nih", { variant: "success" });
+    enqueueSnackbar('berhasil nih', { variant: 'success' });
   };
 
   return (
@@ -72,19 +72,19 @@ const AddPhotoForm = () => {
         width: 350,
         px: 4,
         py: 5,
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 3,
       }}
       elevation={3}
-      component="form"
+      component='form'
       onSubmit={handleSubmit(submitHandler)}
     >
       <TextField
-        variant="standard"
-        sx={{ width: "100%" }}
-        label="Lokasi Photo"
-        {...register("place", { required: true })}
+        variant='standard'
+        sx={{ width: '100%' }}
+        label='Lokasi Photo'
+        {...register('place', { required: true })}
         disabled={isSendingData}
       />
 
@@ -98,9 +98,9 @@ const AddPhotoForm = () => {
         isSendingData={isSendingData}
       />
       <Button
-        variant="contained"
-        type="submit"
-        color="inherit"
+        variant='contained'
+        type='submit'
+        color='inherit'
         disabled={isSendingData}
       >
         Upload

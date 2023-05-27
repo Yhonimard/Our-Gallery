@@ -1,9 +1,9 @@
-import { Container, Grid } from "@mui/material";
-import CustomCard from "Components/CustomCard";
-import { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setPhotoDatas } from "Page/store/ImgReducer";
-import Gallery from "Api/Gallery";
+import { Container, Grid } from '@mui/material';
+import CustomCard from 'Components/CustomCard';
+import { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPhotoDatas } from 'Page/Store/img/ImgReducer';
+import Gallery from 'Api/Gallery';
 
 const BottomHome = () => {
   const dispatch = useDispatch();
