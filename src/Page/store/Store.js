@@ -2,7 +2,9 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import imgReducer from './img/ImgReducer';
 import GlobalReducer from './global/GlobalReducer';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
+// import { persistReducer, persistStore } from 'redux-persist';
+import persistReducer from 'redux-persist/es/persistReducer';
+import persistStore from 'redux-persist/es/persistStore';
 
 import AuthReducer from './auth/AuthReducer';
 
