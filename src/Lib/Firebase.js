@@ -4,12 +4,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBnarfbPVsIFpgQwquZ5G00wyHgb5-mesk',
-  authDomain: 'our-gallery-4af12.firebaseapp.com',
-  projectId: 'our-gallery-4af12',
-  storageBucket: 'our-gallery-4af12.appspot.com',
-  messagingSenderId: '688049054370',
-  appId: '1:688049054370:web:8bf7e5509bbbb0c5866dfb',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
