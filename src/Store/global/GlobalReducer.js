@@ -4,6 +4,7 @@ import { enqueueSnackbar } from 'notistack';
 
 const initialState = {
   isSendingData: false,
+  isLoading: false,
 };
 
 export const GlobalState = createSlice({
@@ -21,10 +22,17 @@ export const GlobalState = createSlice({
         TransitionComponent: Zoom,
       });
     },
+    showBackdrop: (state, action) => {
+      state.isLoading = true;
+    },
+    closeBackdrop: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setSendingData, showNotification } = GlobalState.actions;
+export const { setSendingData, showNotification, showBackdrop, closeBackdrop } =
+  GlobalState.actions;
 
 export default GlobalState.reducer;

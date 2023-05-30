@@ -1,17 +1,17 @@
-import { Box, Container } from "@mui/material";
-import AddPhotoForm from "./AddPhotoForm";
+import { Box, Container } from '@mui/material';
+import AddPhotoForm from './AddPhotoForm';
 
 const AddPhoto = () => {
   return (
-    <Container sx={{ minHeight: "100vh" }}>
+    <Container sx={{ minHeight: '100vh' }}>
       <Box
         sx={{
-          minHeight: "110vh",
+          minHeight: '110vh',
           py: { xs: 5 },
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
         }}
       >
         <AddPhotoForm />

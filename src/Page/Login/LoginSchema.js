@@ -24,7 +24,6 @@ const LoginSchema = () => {
     resolver: yupResolver(schema),
   });
 
-  console.log(errors);
   return { handleSubmit, reset, register, errors };
 };
 

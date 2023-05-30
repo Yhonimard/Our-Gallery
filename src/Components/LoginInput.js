@@ -8,7 +8,6 @@ const LoginInput = ({ children, register, name, type, error }) => {
       type={type || 'text'}
       error={error ? true : false}
       helperText={error?.message}
-      focused
       {...register(`${name}`)}
       InputProps={{
         startAdornment: (

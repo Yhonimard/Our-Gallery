@@ -1,40 +1,45 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Skeleton, Typography } from '@mui/material';
+import Aos from 'aos';
 import CustomCard from 'Components/CustomCard';
-import { useEffect, useCallback } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPhotoDatas } from 'Page/Store/img/ImgReducer';
-import Gallery from 'Api/Gallery';
+import { getPhoto } from 'Store/img/Action';
+import 'aos/dist/aos.css';
+import { useNavigate } from 'react-router-dom';
 
 const BottomHome = () => {
   const dispatch = useDispatch();
-  const { photoData } = useSelector((state) => state.img);
-
-  const getPhotoData = useCallback(async () => {
-    const data = await Gallery.getPhoto();
-
-    const filteredData = data.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    console.log(filteredData);
-
-    dispatch(setPhotoDatas(filteredData));
+  const navigate = useNavigate();
+  const { photoData, isImgLoad } = useSelector((state) => state.img);
+  useEffect(() => {
+    dispatch(getPhoto());
   }, [dispatch]);
 
-  useEffect(() => {
-    getPhotoData();
-  }, [getPhotoData]);
-
+  const handleClickCard = (id) => {
+    navigate(`${id}`);
+  };
   return (
     <Container sx={{ mt: 5, paddingBottom: 10 }}>
       <Grid container spacing={1}>
         {photoData.map((p) => (
-          <CustomCard
-            photos={p.photos}
-            date={p.date}
-            place={p.place}
-            key={p.id}
-          />
+          <Grid item xs={6} sm={4} md={3} lg={2.4} key={p.id}>
+            <CustomCard
+              isImgLoad={isImgLoad}
+              photos={p.photos}
+              date={p.date}
+              place={p.place}
+              id={p.id}
+              key={p.id}
+              onClickCard={handleClickCard}
+            />
+            {!isImgLoad && (
+              <Skeleton
+                variant='rectangular'
+                height={326.1}
+                data-aos='fade-up'
+              />
+            )}
+          </Grid>
         ))}
       </Grid>
     </Container>

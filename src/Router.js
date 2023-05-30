@@ -5,6 +5,7 @@ import AddPhoto from './Page/AddPhotos/AddPhotoPage';
 import LoginPage from './Page/Login/LoginPage';
 import Protected from 'Components/Protected';
 import Authorized from 'Components/Authorized';
+import ImgDetailPage from 'Page/ImgDetail/ImgDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: ':pid',
+        element: <ImgDetailPage />,
       },
       {
         path: 'add-photo',

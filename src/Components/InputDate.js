@@ -21,13 +21,12 @@ const DatePick = ({ AdapterMoment, control, isSendingData }) => {
             disabled={isSendingData}
             renderInput={(params) => (
               <TextField
+                type='date'
+                variant='standard'
+                size='small'
                 error={invalid}
                 helperText={invalid ? error.message : null}
                 id='pilih tanggal'
-                variant='standard'
-                margin='dense'
-                fullWidth
-                color='primary'
                 autoComplete='bday'
                 {...params}
               />

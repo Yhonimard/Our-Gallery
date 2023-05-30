@@ -26,7 +26,7 @@ export const LoginAuth = (datas) => {
             const getCurrentTime = generateGreetings();
             dispatch(
               showNotification({
-                variant: 'success',
+                variant: 'info',
                 message: `hallooo sayangku ${name}, ${getCurrentTime} selamat beraktifitass babyyy`,
               })
             );
@@ -34,7 +34,7 @@ export const LoginAuth = (datas) => {
             const getCurrentTime = generateGreetings();
             dispatch(
               showNotification({
-                variant: 'success',
+                variant: 'info',
                 message: `halo ${name}, ${getCurrentTime}`,
               })
             );

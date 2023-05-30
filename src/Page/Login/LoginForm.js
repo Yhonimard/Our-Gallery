@@ -3,7 +3,7 @@ import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 import LoginSchema from './LoginSchema';
 import LoginInput from 'Components/LoginInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginAuth } from 'Page/Store/auth/Action';
+import { LoginAuth } from 'Store/auth/Action';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -12,7 +12,6 @@ const LoginForm = () => {
   const auth = useSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(LoginAuth(data));
     auth && navigate('/');
   };
@@ -47,7 +46,8 @@ const LoginForm = () => {
             <Stack spacing={1}>
               <Button
                 variant='contained'
-                sx={{ color: '#f1f1f1' }}
+                color='inherit'
+                // sx={{ color: '#f1f1f1' }}
                 type='submit'
               >
                 LOGIN NOW
